@@ -1,0 +1,191 @@
+/*
+  Orthopedics clinic website: Medical Teal theme, classic "Established practice" style
+  ------------------------------------------------
+  Load this file first on every page. Use the variables below instead of
+  typing hex codes, so the whole site stays consistent.
+
+  Rules
+  1. White is the main page background. Use --color-bg-tint only on every
+     second section, never on two sections in a row.
+  2. Teal (--color-primary) is for buttons, links and small highlights.
+     Do not fill large areas with it.
+  3. Body text is --color-text, never pure black (#000).
+  4. Normal text must keep a contrast of 4.5:1 or more. Every text/background
+     pair listed in this file already passes.
+  5. One primary button per screen section. Other actions use the
+     secondary button.
+  6. Buttons and links must be at least 44px tall so they are easy to tap.
+  7. Classic look: serif headings, near-square corners, thin divider lines
+     and centred section headings. No heavy shadows or rounded pills.
+
+  Fonts (add to <head>):
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap">
+*/
+
+:root {
+  /* Backgrounds */
+  --color-bg: #FFFFFF;            /* main page background */
+  --color-bg-tint: #EFF8F7;       /* alternate sections, hero */
+  --color-bg-tint-strong: #D9EEEC;/* image placeholders, selected states */
+  --color-bg-dark: #12262B;       /* footer and call-to-action bands */
+
+  /* Brand */
+  --color-primary: #0E7C7B;       /* buttons, links, icons */
+  --color-primary-hover: #0A5F5E; /* hover and pressed */
+  --color-primary-soft: #CFE9E7;  /* badges, focus ring */
+
+  /* Text */
+  --color-text: #12262B;          /* headings and body */
+  --color-text-muted: #4A5F63;    /* secondary text, captions */
+  --color-text-on-dark: #FFFFFF;  /* text on --color-bg-dark and on teal */
+  --color-text-on-dark-muted: #C4D6D5;
+
+  /* Lines */
+  --color-border: #D5E3E1;        /* cards, dividers */
+  --color-border-strong: #7F9A98; /* form inputs */
+
+  /* Status (forms and alerts only) */
+  --color-success: #1E7A46;
+  --color-warning: #8A5A00;
+  --color-error: #B3261E;
+
+  /* Typography */
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Source Sans 3", system-ui, sans-serif;
+
+  --text-xs: 0.875rem;   /* 14px  captions */
+  --text-sm: 0.9375rem;  /* 15px  nav, card text */
+  --text-base: 1.0625rem; /* 17px  body */
+  --text-lg: 1.1875rem;  /* 19px  lead paragraph */
+  --text-xl: 1.375rem;   /* 22px  card and list titles */
+  --text-2xl: 2.375rem;  /* 38px  section headings */
+  --text-3xl: 3.25rem;   /* 52px  hero heading */
+
+  /* Spacing (multiples of 4px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 72px;   /* vertical padding of a section */
+
+  /* Shape */
+  --radius-sm: 2px;   /* buttons, inputs */
+  --radius-md: 2px;   /* cards */
+  --radius-lg: 4px;   /* hero image */
+  --shadow-card: 0 1px 2px rgba(18, 38, 43, 0.06), 0 8px 24px rgba(18, 38, 43, 0.06);
+
+  /* Layout */
+  --container-width: 1120px;
+  --container-padding: 32px;
+}
+
+/* Base ------------------------------------------------------------------ */
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.55;
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+h1, h2, h3 {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--color-text);
+}
+h1 { font-size: var(--text-3xl); line-height: 1.12; }
+h2 { font-size: var(--text-2xl); line-height: 1.2; }
+h3 { font-size: var(--text-xl); }
+
+a { color: var(--color-primary); }
+a:hover { color: var(--color-primary-hover); }
+
+:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Layout ---------------------------------------------------------------- */
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.section { padding: var(--space-8) 0; background: var(--color-bg); }
+.section--tint { background: var(--color-bg-tint); }
+.section--dark { background: var(--color-bg-dark); color: var(--color-text-on-dark); }
+.section--dark h2 { color: var(--color-text-on-dark); }
+.section--dark p { color: var(--color-text-on-dark-muted); }
+
+/* Components ------------------------------------------------------------ */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 14px 28px;
+  font: 600 var(--text-base) var(--font-body);
+  border-radius: var(--radius-sm);
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+}
+.btn--primary { background: var(--color-primary); color: var(--color-text-on-dark); }
+.btn--primary:hover { background: var(--color-primary-hover); color: var(--color-text-on-dark); }
+.btn--secondary { background: var(--color-bg); color: var(--color-text); border-color: var(--color-border-strong); }
+.btn--secondary:hover { border-color: var(--color-primary); color: var(--color-primary-hover); }
+
+.card {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-5);
+}
+.card:hover { box-shadow: var(--shadow-card); }
+
+.eyebrow {
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-primary);
+}
+
+.text-muted { color: var(--color-text-muted); }
+
+.input {
+  width: 100%;
+  min-height: 46px;
+  padding: 12px;
+  font: inherit;
+  color: var(--color-text);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-sm);
+}
+.input:focus { border-color: var(--color-primary); }
+.input--error { border-color: var(--color-error); }
+
+.badge {
+  display: inline-block;
+  padding: 4px 10px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-primary-hover);
+  background: var(--color-primary-soft);
+  border-radius: var(--radius-sm);
+}
