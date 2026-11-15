@@ -1,0 +1,38 @@
+<%- include('../partials/page-start') %>
+<%- include('../partials/page-heading', { heading: 'Terms of use', lead: 'The terms for using this website.' }) %>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <%- include('../partials/policy-reviewed') %>
+
+    <h2>About this website</h2>
+    <p>This website is run by <%= clinicName %>, <%= addressLine %>. By using it you agree to these terms. If you don't agree, please don't use the site. You can still reach us by phone on <%= fact(clinic.phone, 'PHONE') %>.</p>
+
+    <h2>Appointment requests</h2>
+    <p>Sending the appointment form is a request, not a booking. Your appointment is confirmed only when our front desk has spoken to you and agreed a time. Please give your real name and a phone number we can reach you on.</p>
+    <p>The form isn't checked outside OPD hours and isn't for emergencies. In an emergency, go to the nearest hospital emergency department.</p>
+
+    <h2>Health information</h2>
+    <p>The pages about conditions and treatments give general information. They don't replace an examination by a doctor. Please read our <a href="/medical-disclaimer">medical disclaimer</a>.</p>
+
+    <h2>Accuracy</h2>
+    <p>We keep our hours, phone numbers and doctor details up to date, but they can change at short notice, for example on public holidays. If something matters to your visit, please call and check.</p>
+
+    <h2>Using the site fairly</h2>
+    <p>Please don't send false appointment requests, try to break into the site or use automated tools to send forms. We may block access for anyone who does.</p>
+
+    <h2>Our content</h2>
+    <p>The text, photos and design on this site belong to <%= clinicName %>. You're welcome to share a link to any page. Please ask us before copying the content elsewhere.</p>
+
+    <h2>Links to other sites</h2>
+    <p>Some pages link to other sites, such as Google Maps. We don't control those sites and aren't responsible for what's on them.</p>
+
+    <h2>Your privacy</h2>
+    <p>Our <a href="/privacy-policy">privacy policy</a> explains what we collect and how we use it.</p>
+
+    <h2>Changes</h2>
+    <p>We may update these terms. The date at the top of this page shows when they were last reviewed.</p>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

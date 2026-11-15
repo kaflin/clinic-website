@@ -1,0 +1,56 @@
+<%- include('../partials/page-start') %>
+<%- include('../partials/page-heading', {
+  eyebrow: 'Contact',
+  heading: `Contact our orthopaedic clinic in ${cityName}`,
+  lead: 'Call us, visit us, or send a request and we\'ll call you back.',
+}) %>
+
+<section class="section">
+  <div class="container split">
+    <div class="stack">
+      <h2>Find us</h2>
+      <dl class="fact-list">
+        <div><dt>Address</dt><dd><%= addressLine %></dd></div>
+        <div><dt>Appointments</dt><dd><%- include('../partials/phone-link', { number: clinic.phone, label: 'PHONE' }) %></dd></div>
+        <div><dt>Emergency</dt><dd><%- include('../partials/phone-link', { number: clinic.emergencyPhone, label: 'EMERGENCY PHONE' }) %></dd></div>
+        <div><dt>Email</dt><dd><% if (clinic.email) { %><a href="mailto:<%= clinic.email %>"><%= clinic.email %></a><% } else { %>[EMAIL]<% } %></dd></div>
+        <div><dt>OPD hours</dt><dd><%= hoursText %></dd></div>
+      </dl>
+<% if (clinic.directionsUrl) { -%>
+      <p><a class="btn btn--secondary" href="<%= clinic.directionsUrl %>" rel="noopener">Get directions on Google Maps</a></p>
+<% } else { -%>
+      <p>[GET DIRECTIONS LINK]</p>
+<% } -%>
+    </div>
+<% if (clinic.mapEmbedUrl) { -%>
+    <iframe class="map" src="<%= clinic.mapEmbedUrl %>" title="Map showing <%= clinicName %>" width="600" height="420" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+<% } else { -%>
+    <div class="photo-placeholder map" role="img" aria-label="Map to be added">Google Map of the clinic</div>
+<% } -%>
+  </div>
+</section>
+
+<section class="section section--tint" id="appointment">
+  <div class="container split">
+    <div class="stack">
+      <h2>Request an appointment</h2>
+      <p class="text-muted">Leave your details and our front desk will call you back to confirm a time. Your appointment isn't booked until you've spoken to us.</p>
+      <p class="text-muted">Please don't use this form for an emergency. If a bone is showing, a limb is badly bent or you can't feel or move an arm or leg, go to the nearest emergency department.</p>
+    </div>
+    <%- include('../partials/appointment-form') %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>Call or use the form?</h2>
+    <p>Call if you need to be seen today or tomorrow, if you want to change an appointment you already have, or if you have a question about medicine or a plaster we've given you. The phone is answered during OPD hours.</p>
+    <p>Use the form if your problem has been there a while and a day's wait makes no difference. Write a line about what's wrong, such as "knee pain for three months" or "check-up after wrist fracture", so the front desk can book you with the right surgeon.</p>
+
+    <h2>Before you travel</h2>
+    <p>Hours can change on public holidays and festival days, so please call before you set out on those days. If you're coming from outside <%= cityName %>, tell the front desk when you book so we can find a time that fits your travel.</p>
+    <p>Bring your old X-rays, scans and reports, and a list of the medicines you take. Our <a href="/patient-information">patient information page</a> has more on what to expect, and you can read about <a href="/doctors">our surgeons</a> and the <a href="/services">treatments we offer</a> before you come.</p>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

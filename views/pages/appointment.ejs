@@ -1,0 +1,29 @@
+<%- include('../partials/page-start') %>
+
+<section class="section section--tint">
+  <div class="container split">
+    <div class="stack">
+      <span class="rule" aria-hidden="true"></span>
+      <h1>Book an appointment</h1>
+      <p class="lead">Leave your details and our front desk will call you back to confirm a time.</p>
+      <p class="text-muted">Your appointment isn't booked until you've spoken to us. We call back during OPD hours, <%= hoursText %>.</p>
+      <%- include('../partials/contact-details') %>
+      <p class="text-muted">Please don't use this form for an emergency. Call <%- include('../partials/phone-link', { number: clinic.emergencyPhone, label: 'EMERGENCY PHONE' }) %> or go to the nearest emergency department.</p>
+    </div>
+    <%- include('../partials/appointment-form') %>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>What happens next</h2>
+    <ol>
+      <li>We receive your name and phone number.</li>
+      <li>Someone from the front desk calls you during OPD hours.</li>
+      <li>We agree a day and time, and tell you what to bring.</li>
+    </ol>
+    <p>If you miss our call, you can ring us back on the number above. Want to know more before you book? Read about <a href="/doctors">our surgeons</a>, the <a href="/services">treatments we offer</a> and our <a href="/patient-information">answers to common questions</a>.</p>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

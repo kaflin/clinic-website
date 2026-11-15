@@ -1,0 +1,2 @@
+<%# A tap-to-call link. Pass `number` and the `label` to show while the number is missing. -%>
+<% if (telHref(number)) { %><a href="<%= telHref(number) %>"><%= number %></a><% } else { %>[<%= label %>]<% } -%>

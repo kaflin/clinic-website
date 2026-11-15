@@ -1,0 +1,11 @@
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <ol class="container breadcrumbs__list">
+<% trail.forEach((step, index) => { -%>
+<% if (index < trail.length - 1) { -%>
+    <li><a href="<%= step.path %>"><%= step.name %></a></li>
+<% } else { -%>
+    <li aria-current="page"><%= step.name %></li>
+<% } -%>
+<% }) -%>
+  </ol>
+</nav>

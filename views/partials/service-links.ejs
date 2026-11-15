@@ -1,0 +1,6 @@
+<%# A plain list of links to treatment pages. Pass `items` and, if needed, a `listClass`. -%>
+<ul<% if (locals.listClass) { %> class="<%= listClass %>"<% } %>>
+<% items.forEach((service) => { -%>
+  <li><a href="/services/<%= service.slug %>"><%= service.name %></a></li>
+<% }) -%>
+</ul>

@@ -1,0 +1,35 @@
+<div class="topbar">
+  <div class="container topbar__inner">
+    <span class="topbar__item"><%- include('icon', { name: 'clock' }) %> OPD: <%= hoursText %></span>
+    <span class="topbar__item">
+      <%- include('icon', { name: 'phone' }) %>
+      Appointments:
+      <%- include('phone-link', { number: clinic.phone, label: 'PHONE' }) %>
+      <span class="topbar__divider" aria-hidden="true">|</span>
+      Emergency:
+      <%- include('phone-link', { number: clinic.emergencyPhone, label: 'EMERGENCY PHONE' }) %>
+    </span>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a class="brand" href="/">
+      <span class="brand__name"><%= clinicName %></span>
+      <span class="eyebrow brand__tagline"><%= clinic.tagline %>, est. <%= fact(clinic.establishedYear, 'YEAR') %></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" hidden>
+      <%- include('icon', { name: 'menu' }) %> Menu
+    </button>
+    <nav class="main-nav" id="main-nav" aria-label="Main">
+      <ul class="main-nav__list">
+<% nav.forEach((item) => {
+     const current = item.path === '/' ? currentPath === '/' : currentPath === item.path || currentPath.startsWith(item.path + '/'); -%>
+        <li><a href="<%= item.path %>"<% if (current) { %> aria-current="page"<% } %>><%= item.label %></a></li>
+<% }) -%>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="main">

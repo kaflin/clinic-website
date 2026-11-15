@@ -1,0 +1,6 @@
+<%# The top of every page: <head>, top bar, header and, on inner pages, breadcrumbs. -%>
+<%- include('head') %>
+<%- include('header') %>
+<% if (locals.trail) { -%>
+<%- include('breadcrumbs') %>
+<% } -%>

@@ -1,0 +1,23 @@
+<%
+  // Field lengths come from the same limits the server checks against.
+  const fields = [
+    { name: 'name', label: 'Full name', type: 'text', maxlength: formLimits.name, autocomplete: 'name', required: true },
+    { name: 'phone', label: 'Phone number', type: 'tel', maxlength: formLimits.phone, autocomplete: 'tel', inputmode: 'tel', required: true },
+    { name: 'concern', label: 'What would you like to be seen for?', type: 'textarea', maxlength: formLimits.concern, rows: 3 },
+  ];
+-%>
+<form class="form card" action="/appointment" method="post" novalidate>
+<% if (form.message) { -%>
+  <p class="form__message" role="alert"><%= form.message %></p>
+<% } -%>
+  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+  <div class="form__trap" aria-hidden="true">
+    <label for="f-website">Leave this field empty</label>
+    <input id="f-website" name="website" type="text" tabindex="-1" autocomplete="off">
+  </div>
+<% fields.forEach((field) => { -%>
+  <%- include('form-field', { field }) %>
+<% }) -%>
+  <button class="btn btn--primary" type="submit">Send request</button>
+  <p class="form__note text-muted">We use your details only to call you back. Read our <a href="/privacy-policy">privacy policy</a>.</p>
+</form>

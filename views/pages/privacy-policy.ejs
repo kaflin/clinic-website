@@ -1,0 +1,40 @@
+<%- include('../partials/page-start') %>
+<%- include('../partials/page-heading', { heading: 'Privacy policy', lead: 'What we collect on this website, why, and how long we keep it.' }) %>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <%- include('../partials/policy-reviewed') %>
+
+    <h2>Who we are</h2>
+    <p>This website belongs to <%= clinicName %>, <%= addressLine %>. If you have a question about your details, call <%= fact(clinic.phone, 'PHONE') %> or write to <%= fact(clinic.email, 'EMAIL') %>.</p>
+
+    <h2>What we collect</h2>
+    <p>We collect details only when you send the appointment form. The form asks for:</p>
+    <ul>
+      <li>your full name</li>
+      <li>your phone number</li>
+      <li>a short note on what you'd like to be seen for, if you choose to write one</li>
+    </ul>
+    <p>We don't ask for your address, date of birth, ID numbers or payment details on this site. Please don't put test results or a detailed medical history in the form. Tell the doctor at your visit.</p>
+
+    <h2>Why we collect it</h2>
+    <p>We use your name and phone number to call you back and agree an appointment time. The note helps the front desk book you with the right surgeon. We don't use your details for advertising and we don't sell or share them with other companies.</p>
+
+    <h2>Who can see it</h2>
+    <p>Only the clinic's front desk staff and doctors can see appointment requests. When a request arrives, the front desk gets an email with your name and phone number so they can call you. That email doesn't include what you'd like to be seen for.</p>
+
+    <h2>How long we keep it</h2>
+    <p>We delete appointment requests sent through this website <%= fact(clinic.appointmentRetentionMonths, 'NUMBER') %> months after you send them. If you become a patient, your medical record is kept separately at the clinic and isn't stored on this website.</p>
+
+    <h2>Cookies</h2>
+    <p>This site sets one cookie, on pages that have the appointment form. It protects the form from misuse by other websites. It holds a random code, says nothing about you and expires after two hours. We don't use advertising or tracking cookies.</p>
+
+    <h2>Other services</h2>
+    <p>The fonts on this site are loaded from Google Fonts and the map on the contact page comes from Google Maps. When your browser loads them, Google receives your IP address, as it does on any site that uses these services.</p>
+
+    <h2>Your choices</h2>
+    <p>You can ask us what details we hold from your appointment request, ask us to correct them or ask us to delete them. Call or email us using the details above and we'll do it.</p>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

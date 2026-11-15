@@ -1,0 +1,40 @@
+<%- include('../partials/page-start') %>
+<%- include('../partials/page-heading', {
+  eyebrow: 'Our surgeons',
+  heading: `Orthopaedic surgeons in ${cityName}`,
+  lead: 'Every patient is seen by a consultant. Here is who they are, where they trained and what they treat.',
+}) %>
+
+<section class="section">
+  <div class="container stack-lg">
+<% doctors.forEach((doctor) => { -%>
+    <article class="doctor-row">
+      <%- include('../partials/doctor-photo', { doctor, photoClass: 'doctor-row__photo' }) %>
+      <div class="stack">
+        <h2><a href="/doctors/<%= doctor.slug %>"><%= fact(doctor.name, 'DOCTOR NAME') %></a></h2>
+        <p class="text-muted"><%= fact(doctor.qualifications, 'QUALIFICATIONS') %></p>
+        <p><%= fact(doctor.role, 'ROLE') %>, with <%= fact(doctor.experienceYears, 'YEARS') %> years in practice. Medical council registration number <%= fact(doctor.registrationNumber, 'COUNCIL REG. NO.') %>.</p>
+        <h3>Treats</h3>
+        <%- include('../partials/service-links', { items: servicesForDoctor(doctor), listClass: 'link-list' }) %>
+        <p><a href="/doctors/<%= doctor.slug %>">Read more about <%= fact(doctor.name, 'DOCTOR NAME') %></a></p>
+      </div>
+    </article>
+<% }) -%>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container container--narrow prose">
+    <h2>What an orthopaedic surgeon does</h2>
+    <p>An orthopaedic surgeon is a doctor who has trained for several more years, after medical school, in problems of the bones, joints, spine, muscles and ligaments. Despite the name, most of the work isn't surgery. It's finding out why something hurts and treating it with medicine, exercises, a plaster or a brace. An operation is one of the tools, used when the others aren't enough.</p>
+    <p>Some surgeons go on to a fellowship, which is a further year or more spent on one area such as joint replacement, the spine or sports injuries. Where our surgeons have done this, it's listed on their page.</p>
+
+    <h2>How to check a doctor's registration</h2>
+    <p>Every doctor who practises in Nepal must be registered with the Nepal Medical Council. The registration number is listed beside each surgeon above. You can ask to see a doctor's certificate at our front desk, and you can check a number with the council yourself.</p>
+    <h2>Choosing who to see</h2>
+    <p>You don't need to work out which surgeon is right for your problem. Tell us what's wrong when you book, and the front desk will give you a time with the surgeon who treats it most often. If you've seen one of our surgeons before and want to stay with them, say so and we'll arrange it.</p>
+  </div>
+</section>
+
+<%- include('../partials/booking-band') %>
+<%- include('../partials/footer') %>

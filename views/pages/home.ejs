@@ -1,0 +1,80 @@
+<%- include('../partials/page-start') %>
+
+<section class="section section--tint hero">
+  <div class="container hero__grid">
+<% if (lead && lead.photo) { -%>
+    <img class="hero__photo" src="/images/<%= lead.photo.file %>" width="<%= lead.photo.width %>" height="<%= lead.photo.height %>" alt="<%= lead.name %>, <%= fact(lead.role, 'ROLE') %>" fetchpriority="high">
+<% } else { -%>
+    <div class="photo-placeholder hero__photo" role="img" aria-label="Photo to be added: senior surgeon portrait">Portrait: senior surgeon in consulting room</div>
+<% } -%>
+    <div class="hero__text">
+      <span class="rule" aria-hidden="true"></span>
+      <h1>Orthopaedic care in <%= cityName %> since <%= fact(clinic.establishedYear, 'YEAR') %></h1>
+      <p class="lead">Led by <%= fact(lead && lead.name, 'DOCTOR NAME') %>, <%= fact(lead && lead.qualifications, 'QUALIFICATIONS') %>. Joint replacement, spine surgery and fracture care, with every patient seen by a consultant.</p>
+      <div class="button-row">
+        <a class="btn btn--primary" href="#appointment">Request an appointment</a>
+        <a class="btn btn--secondary" href="/doctors">Meet our surgeons</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="credentials" aria-label="Credentials">
+  <ul class="container credentials__list">
+<% clinic.credentials.forEach((item) => { -%>
+    <li>
+      <span class="credentials__value"><%= fact(item.value, item.label.toUpperCase()) %></span>
+      <span class="credentials__label"><%= item.label %></span>
+    </li>
+<% }) -%>
+  </ul>
+</section>
+
+<section class="section">
+  <div class="container stack-lg">
+    <div class="section-heading">
+      <p class="eyebrow">Treatments</p>
+      <h2>Areas of specialisation</h2>
+      <p class="text-muted section-heading__intro">We treat problems of the bones, joints, spine and muscles in adults and children. Most patients get better without an operation, and we'll always tell you if that applies to you.</p>
+    </div>
+    <%- include('../partials/service-list', { items: services }) %>
+  </div>
+</section>
+
+<section class="section section--dark testimonial">
+  <figure class="container testimonial__inner">
+    <span class="rule rule--soft" aria-hidden="true"></span>
+    <blockquote class="testimonial__quote"><p><%= fact(clinic.testimonial.quote, 'PATIENT TESTIMONIAL') %></p></blockquote>
+    <figcaption class="testimonial__source"><%= fact(clinic.testimonial.patientName, 'PATIENT NAME') %>, <%= fact(clinic.testimonial.treatment, 'TREATMENT') %>, <%= fact(clinic.testimonial.year, 'YEAR') %></figcaption>
+<% if (clinic.googleReviewsUrl) { -%>
+    <a class="testimonial__link" href="<%= clinic.googleReviewsUrl %>" rel="noopener">Read our patient reviews on Google</a>
+<% } -%>
+  </figure>
+</section>
+
+<section class="section">
+  <div class="container container--narrow stack-lg">
+    <div class="section-heading">
+      <p class="eyebrow">Patient information</p>
+      <h2>Before you visit</h2>
+    </div>
+    <%- include('../partials/faq-list', { items: faqs }) %>
+    <p class="text-center"><a href="/patient-information">More questions patients ask us</a></p>
+  </div>
+</section>
+
+<section class="section section--tint" id="appointment">
+  <div class="container split">
+    <div class="stack">
+      <h2>Request an appointment</h2>
+      <p class="text-muted">Leave your details and our front desk will call you back to confirm a time.</p>
+      <%- include('../partials/contact-details') %>
+<% if (clinic.directionsUrl) { -%>
+      <p><a href="<%= clinic.directionsUrl %>" rel="noopener">Get directions on Google Maps</a></p>
+<% } -%>
+    </div>
+    <%- include('../partials/appointment-form') %>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

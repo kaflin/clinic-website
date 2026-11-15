@@ -1,0 +1,38 @@
+<%- include('../partials/page-start') %>
+<% const name = fact(doctor.name, 'DOCTOR NAME'); -%>
+
+<section class="section section--tint">
+  <div class="container doctor-row">
+    <%- include('../partials/doctor-photo', { doctor, photoClass: 'doctor-row__photo' }) %>
+    <div class="stack">
+      <span class="rule" aria-hidden="true"></span>
+      <h1><%= name %></h1>
+      <p class="lead"><%= fact(doctor.role, 'ROLE') %></p>
+      <dl class="fact-list">
+        <div><dt>Qualifications</dt><dd><%= fact(doctor.qualifications, 'QUALIFICATIONS') %></dd></div>
+        <div><dt>Medical council registration</dt><dd><%= fact(doctor.registrationNumber, 'COUNCIL REG. NO.') %></dd></div>
+        <div><dt>Years in practice</dt><dd><%= fact(doctor.experienceYears, 'YEARS') %></dd></div>
+      </dl>
+      <p><a class="btn btn--primary" href="/appointment">Request an appointment</a></p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>About <%= name %></h2>
+<% if (doctor.bio) { doctor.bio.forEach((paragraph) => { -%>
+    <p><%= paragraph %></p>
+<% }) } else { -%>
+    <p>[DOCTOR BIOGRAPHY]</p>
+<% } -%>
+
+    <h2>Conditions and treatments</h2>
+    <%- include('../partials/service-links', { items: doctorServices }) %>
+
+    <h2>Seeing <%= name %></h2>
+    <p>OPD hours are <%= hoursText %>. To book, <a href="/appointment">send an appointment request</a> or call <%- include('../partials/phone-link', { number: clinic.phone, label: 'PHONE' }) %>. Please bring your old X-rays, scans and reports with you.</p>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

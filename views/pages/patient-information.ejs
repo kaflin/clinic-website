@@ -1,0 +1,26 @@
+<%- include('../partials/page-start') %>
+<%- include('../partials/page-heading', {
+  eyebrow: 'Patient information',
+  heading: 'Questions patients ask us',
+  lead: 'Short answers to what we\'re asked most at the front desk and in the consulting room.',
+}) %>
+
+<section class="section">
+  <div class="container container--narrow stack-lg">
+    <%- include('../partials/faq-list', { items: faqs }) %>
+    <%- include('../partials/review-note', { review }) %>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container container--narrow prose">
+    <h2>Read about a treatment</h2>
+    <p>Each page explains the condition, the symptoms, how it's treated, what recovery is like and when to see a doctor.</p>
+    <%- include('../partials/service-links', { items: services }) %>
+    <h2>Your question isn't here?</h2>
+    <p>Call us on <%- include('../partials/phone-link', { number: clinic.phone, label: 'PHONE' }) %> during OPD hours, or ask the surgeon at your visit. It helps to write your questions down before you come.</p>
+  </div>
+</section>
+
+<%- include('../partials/booking-band') %>
+<%- include('../partials/footer') %>

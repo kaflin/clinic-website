@@ -1,0 +1,11 @@
+<%# The ruled list of treatments. Pass `items`, a list of services. -%>
+<ul class="ruled-list">
+<% items.forEach((service) => { -%>
+  <li>
+    <a class="ruled-list__link" href="/services/<%= service.slug %>">
+      <span class="ruled-list__title"><%= service.name %></span>
+      <span class="ruled-list__note"><%= service.short %></span>
+    </a>
+  </li>
+<% }) -%>
+</ul>

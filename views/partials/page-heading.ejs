@@ -1,0 +1,12 @@
+<header class="page-heading section section--tint">
+  <div class="container page-heading__inner">
+    <span class="rule" aria-hidden="true"></span>
+<% if (locals.eyebrow) { -%>
+    <p class="eyebrow"><%= eyebrow %></p>
+<% } -%>
+    <h1><%= heading %></h1>
+<% if (locals.lead) { -%>
+    <p class="lead"><%= lead %></p>
+<% } -%>
+  </div>
+</header>

@@ -1,0 +1,8 @@
+<%# A doctor's photo, or a marked placeholder until the photo is added.
+    Pass `doctor` and `photoClass`. Set `lazy` to true below the first screen. -%>
+<% const doctorName = fact(doctor.name, 'DOCTOR NAME'); -%>
+<% if (doctor.photo) { -%>
+<img class="<%= photoClass %>" src="/images/<%= doctor.photo.file %>" width="<%= doctor.photo.width %>" height="<%= doctor.photo.height %>"<% if (locals.lazy) { %> loading="lazy"<% } %> alt="<%= doctorName %>, <%= fact(doctor.role, 'ROLE') %>">
+<% } else { -%>
+<div class="photo-placeholder <%= photoClass %>" role="img" aria-label="Photo to be added: <%= doctorName %>">Photo: <%= doctorName %></div>
+<% } -%>

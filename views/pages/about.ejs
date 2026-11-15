@@ -1,0 +1,61 @@
+<%- include('../partials/page-start') %>
+<%- include('../partials/page-heading', {
+  eyebrow: 'About the practice',
+  heading: `An orthopaedic practice in ${cityName} since ${fact(clinic.establishedYear, 'YEAR')}`,
+  lead: 'We look after bones, joints, the spine and the muscles around them, for adults and children.',
+}) %>
+
+<section class="section">
+  <div class="container container--narrow prose">
+    <h2>How the clinic started</h2>
+<% if (clinic.about.history) { clinic.about.history.forEach((paragraph) => { -%>
+    <p><%= paragraph %></p>
+<% }) } else { -%>
+    <p>[CLINIC HISTORY]</p>
+<% } -%>
+
+    <h2>What we have on site</h2>
+<% if (clinic.about.facilities) { -%>
+    <ul>
+<% clinic.about.facilities.forEach((facility) => { -%>
+      <li><%= facility %></li>
+<% }) -%>
+    </ul>
+<% } else { -%>
+    <p>[FACILITIES]</p>
+<% } -%>
+
+    <h2>What happens at your first visit</h2>
+    <p>You'll start at the front desk, where we take your name, age and phone number and make your file. If you've come with someone, they're welcome to sit in with you.</p>
+    <p>The surgeon will ask how the problem began, what makes it better or worse and what treatment you've already had. Then they'll examine the joint or the part of your back that hurts. This can mean bending, pressing and watching you walk, so loose clothes help.</p>
+    <p>If an X-ray or a scan is needed, we'll explain why before you have it. Once the results are in, the surgeon will tell you what they've found and what your choices are. For most people that means medicine, exercises or a support such as a brace. If an operation is one of the choices, we'll explain what it involves, the risks and how long recovery takes. You don't have to decide on the day.</p>
+
+    <h2>What to bring</h2>
+    <ul>
+      <li>X-rays, MRI or CT scans and their reports, including old ones</li>
+      <li>A list of the medicines you take, with the dose</li>
+      <li>Notes or a discharge summary from any doctor who has treated the same problem</li>
+    </ul>
+
+    <h2>The treatments we offer</h2>
+    <p>Each of these pages explains the condition, the treatment and the recovery in plain words.</p>
+    <%- include('../partials/service-links', { items: services }) %>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container stack-lg">
+    <div class="section-heading">
+      <p class="eyebrow">Our surgeons</p>
+      <h2>Who you'll see</h2>
+    </div>
+    <div class="card-grid">
+<% doctors.forEach((doctor) => { -%>
+      <%- include('../partials/doctor-card', { doctor }) %>
+<% }) -%>
+    </div>
+    <p class="text-center"><a class="btn btn--primary" href="/appointment">Request an appointment</a></p>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,9 @@
+<%# Questions and answers. Pass `items`, each with a question and an answer. -%>
+<dl class="faq-list">
+<% items.forEach((item) => { -%>
+  <div class="faq-list__item">
+    <dt><%= item.question %></dt>
+    <dd><%= item.answer %></dd>
+  </div>
+<% }) -%>
+</dl>

@@ -1,0 +1,33 @@
+<%- include('../partials/page-start') %>
+<%- include('../partials/page-heading', {
+  eyebrow: 'Treatments',
+  heading: `Orthopaedic treatments in ${cityName}`,
+  lead: 'Orthopaedics is the care of bones, joints, the spine and the muscles and ligaments that move them. These are the problems we treat most.',
+}) %>
+
+<section class="section">
+  <div class="container stack-lg">
+    <%- include('../partials/service-list', { items: services }) %>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container container--narrow prose">
+    <h2>Surgery is rarely the first step</h2>
+    <p>Most people who come to us with a painful knee, back or shoulder don't need an operation. Rest, the right exercises, medicine and time settle the majority of problems. We start there, and we'll tell you plainly if that's all you need.</p>
+    <p>When an operation is the better choice, we'll explain why, what it involves, the risks and how long you'll need to recover. You'll have time to ask questions and talk it over at home before you decide.</p>
+
+    <h2>How we find out what's wrong</h2>
+    <p>A diagnosis starts with listening and an examination. The surgeon will ask how the pain began and what brings it on, then check how the joint moves and where it hurts.</p>
+    <p>An X-ray shows bones and the spaces in joints. An MRI scan shows soft parts such as discs, ligaments and cartilage. A blood test can point to infection, gout or rheumatoid arthritis. We only ask for a test when the result would change your treatment.</p>
+
+    <h2>Not sure which treatment you need?</h2>
+    <p>You don't have to know. Describe the problem when you <a href="/appointment">ask for an appointment</a> and we'll take it from there. If you'd like to read first, our <a href="/patient-information">patient information page</a> answers the questions we hear most, and you can read about <a href="/doctors">our surgeons</a> and what each of them treats.</p>
+
+    <h2>When it can't wait</h2>
+    <p>Some injuries need a hospital emergency department and not a clinic appointment. Go straight away if a bone is showing through the skin, a limb is badly bent, you can't feel or move an arm or leg after an injury, or you have back pain together with loss of bladder or bowel control.</p>
+  </div>
+</section>
+
+<%- include('../partials/booking-band') %>
+<%- include('../partials/footer') %>

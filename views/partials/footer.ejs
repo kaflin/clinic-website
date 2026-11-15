@@ -1,0 +1,42 @@
+</main>
+
+<footer class="site-footer section--dark">
+  <div class="container site-footer__grid">
+    <div>
+      <p class="site-footer__name"><%= clinicName %></p>
+      <address class="site-footer__address">
+        <%- include('contact-details') %>
+      </address>
+    </div>
+    <nav aria-label="Treatments">
+      <h2 class="site-footer__heading">Treatments</h2>
+      <%- include('service-links', { items: services, listClass: 'site-footer__list' }) %>
+    </nav>
+    <nav aria-label="Clinic">
+      <h2 class="site-footer__heading">Clinic</h2>
+      <ul class="site-footer__list">
+        <li><a href="/about">About the practice</a></li>
+        <li><a href="/doctors">Our surgeons</a></li>
+        <li><a href="/patient-information">Patient information</a></li>
+        <li><a href="/contact">Contact and directions</a></li>
+        <li><a href="/appointment">Book an appointment</a></li>
+<% if (clinic.googleReviewsUrl) { -%>
+        <li><a href="<%= clinic.googleReviewsUrl %>" rel="noopener">Patient reviews on Google</a></li>
+<% } -%>
+<% if (clinic.facebookUrl) { -%>
+        <li><a href="<%= clinic.facebookUrl %>" rel="noopener">Our Facebook page</a></li>
+<% } -%>
+      </ul>
+    </nav>
+  </div>
+  <div class="container site-footer__legal">
+    <span>&copy; <%= new Date().getFullYear() %> <%= clinicName %></span>
+    <ul class="site-footer__legal-links">
+      <li><a href="/privacy-policy">Privacy policy</a></li>
+      <li><a href="/terms">Terms of use</a></li>
+      <li><a href="/medical-disclaimer">Medical disclaimer</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>

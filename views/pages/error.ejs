@@ -1,0 +1,13 @@
+<%- include('../partials/page-start') %>
+
+<section class="section section--tint">
+  <div class="container container--narrow page-heading__inner">
+    <span class="rule" aria-hidden="true"></span>
+    <h1><%= heading %></h1>
+    <p class="lead"><%= message %></p>
+    <p class="text-muted">You can reach us on <%- include('../partials/phone-link', { number: clinic.phone, label: 'PHONE' }) %>.</p>
+    <p><a class="btn btn--secondary" href="/">Back to the home page</a></p>
+  </div>
+</section>
+
+<%- include('../partials/footer') %>

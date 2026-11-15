@@ -1,0 +1,55 @@
+<%- include('../partials/page-start') %>
+<%- include('../partials/page-heading', {
+  eyebrow: 'Treatments',
+  heading: `${service.heading} in ${cityName}`,
+}) %>
+
+<section class="section">
+  <div class="container container--narrow prose">
+<%
+  // Each section is either paragraphs or a list of points.
+  const sections = [
+    { heading: 'What it is', paragraphs: service.intro },
+    { heading: 'Symptoms', points: service.symptoms },
+    { heading: 'Treatment', paragraphs: service.treatment },
+    { heading: 'Recovery', paragraphs: service.recovery },
+    { heading: 'When to see a doctor', points: service.whenToSee },
+  ];
+-%>
+<% sections.forEach((section) => { -%>
+    <h2><%= section.heading %></h2>
+<% if (section.points) { -%>
+    <ul>
+<% section.points.forEach((point) => { -%>
+      <li><%= point %></li>
+<% }) -%>
+    </ul>
+<% } else { section.paragraphs.forEach((paragraph) => { -%>
+    <p><%= paragraph %></p>
+<% }) } -%>
+
+<% }) -%>
+<% if (serviceDoctors.length) { -%>
+    <h2>Who treats this at our clinic</h2>
+    <ul>
+<% serviceDoctors.forEach((doctor) => { -%>
+      <li><a href="/doctors/<%= doctor.slug %>"><%= fact(doctor.name, 'DOCTOR NAME') %></a>, <%= fact(doctor.qualifications, 'QUALIFICATIONS') %></li>
+<% }) -%>
+    </ul>
+<% } -%>
+
+    <%- include('../partials/review-note', { review: service.review }) %>
+  </div>
+</section>
+
+<section class="section section--tint">
+  <div class="container stack-lg">
+    <div class="section-heading">
+      <h2>Other treatments</h2>
+    </div>
+    <%- include('../partials/service-list', { items: otherServices }) %>
+  </div>
+</section>
+
+<%- include('../partials/booking-band', { bandHeading: 'Talk to a surgeon about this' }) %>
+<%- include('../partials/footer') %>

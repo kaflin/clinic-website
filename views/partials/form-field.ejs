@@ -1,0 +1,19 @@
+<%# One labelled form field with its error message. Pass `field`:
+    { name, label, type, maxlength, autocomplete, inputmode, required, rows }.
+    type 'textarea' makes a text box. A field that is not required is marked optional. -%>
+<%
+  const id = `f-${field.name}`;
+  const error = form.errors[field.name];
+  const value = form.values[field.name] || '';
+-%>
+<div class="form__field">
+  <label for="<%= id %>"><%= field.label %><% if (!field.required) { %> <span class="text-muted form__optional">(optional)</span><% } %></label>
+<% if (field.type === 'textarea') { -%>
+  <textarea class="input<%= error ? ' input--error' : '' %>" id="<%= id %>" name="<%= field.name %>" rows="<%= field.rows || 3 %>" maxlength="<%= field.maxlength %>"<% if (error) { %> aria-invalid="true" aria-describedby="<%= id %>-error"<% } %>><%= value %></textarea>
+<% } else { -%>
+  <input class="input<%= error ? ' input--error' : '' %>" id="<%= id %>" name="<%= field.name %>" type="<%= field.type %>" maxlength="<%= field.maxlength %>" autocomplete="<%= field.autocomplete %>"<% if (field.inputmode) { %> inputmode="<%= field.inputmode %>"<% } %><% if (field.required) { %> required<% } %> value="<%= value %>"<% if (error) { %> aria-invalid="true" aria-describedby="<%= id %>-error"<% } %>>
+<% } -%>
+<% if (error) { -%>
+  <p class="form__error" id="<%= id %>-error"><%= error %></p>
+<% } -%>
+</div>

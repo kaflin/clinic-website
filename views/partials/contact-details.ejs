@@ -1,0 +1,6 @@
+<%# Address, phone and hours with icons. Used in the footer and beside the form. -%>
+<ul class="contact-list">
+  <li class="contact-line"><%- include('icon', { name: 'location' }) %> <span><%= addressLine %></span></li>
+  <li class="contact-line"><%- include('icon', { name: 'phone' }) %> <%- include('phone-link', { number: clinic.phone, label: 'PHONE' }) %></li>
+  <li class="contact-line"><%- include('icon', { name: 'clock' }) %> <span><%= hoursText %></span></li>
+</ul>
