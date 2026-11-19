@@ -1,3 +1,50 @@
+# Dependencies
 node_modules/
+
+# Secrets and local settings
 .env
+.env.*
+*.env
+node_app/.env
+
+# Logs
 *.log
+logs/
+npm-debug.log*
+
+# Runtime and process files
+*.pid
+*.seed
+*.pid.lock
+
+# Build output and caches
+dist/
+build/
+coverage/
+.cache/
+.eslintcache
+*.tsbuildinfo
+
+# Database files and dumps
+*.sqlite
+*.sqlite3
+*.db
+*.sql.bak
+
+# Uploaded or generated files
+uploads/
+tmp/
+temp/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor and IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code local files
+.claude/

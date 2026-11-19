@@ -8,7 +8,6 @@ const { issueToken, verifyToken } = require('../middleware/csrf');
 const appointments = require('../services/appointments');
 const notify = require('../services/notify');
 const { display } = require('../services/content');
-const { logError, errorName } = require('../services/log');
 
 const router = express.Router({ caseSensitive: true, strict: true });
 
@@ -54,8 +53,7 @@ router.post('/appointment', issueToken, limiter, verifyToken, appointments.rules
   const request = matchedData(req);
   try {
     await appointments.createAppointment(request);
-  } catch (error) {
-    logError(`POST /appointment could not save: ${errorName(error)}`);
+  } catch {
     return renderForm(res, 503, {
       values,
       message: `We couldn't save your request just now. Please try again in a few minutes, or call us on ${display.phone}.`,
@@ -63,7 +61,7 @@ router.post('/appointment', issueToken, limiter, verifyToken, appointments.rules
   }
 
   // The request is saved, so an email problem must not show the patient an error.
-  notify.notifyFrontDesk(request).catch((error) => logError(`front desk email failed: ${errorName(error)}`));
+  notify.notifyFrontDesk(request).catch(() => {});
 
   res.redirect(303, '/appointment/received');
 });

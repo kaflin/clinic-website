@@ -1,0 +1,5 @@
+.breadcrumbs { border-bottom: 1px solid var(--color-border); font-size: var(--text-xs); }
+.breadcrumbs__list { display: flex; flex-wrap: wrap; align-items: center; margin: 0 auto; padding-top: 0; padding-bottom: 0; list-style: none; }
+.breadcrumbs__list li { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-text-muted); }
+.breadcrumbs__list li + li::before { content: "/"; margin: 0 var(--space-2); color: var(--color-border-strong); }
+.breadcrumbs__list a { display: inline-flex; align-items: center; min-height: 44px; }

@@ -10,7 +10,6 @@ const { config } = require('./config');
 const content = require('./services/content');
 const structuredData = require('./services/structured-data');
 const { LIMITS, EMPTY_FORM } = require('./services/appointments');
-const { logError, errorName } = require('./services/log');
 const pageRoutes = require('./routes/pages');
 const appointmentRoutes = require('./routes/appointments');
 const seoRoutes = require('./routes/seo');
@@ -30,11 +29,11 @@ const hiddenPageMeta = (title, description, path) => ({ title, description, path
 
 function createApp(assets) {
   const app = express();
-  const publicDir = path.join(__dirname, '..', 'public');
+  const imagesDir = path.join(__dirname, '..', '..', 'images');
 
   app.disable('x-powered-by');
   app.set('view engine', 'ejs');
-  app.set('views', path.join(__dirname, '..', 'views'));
+  app.set('views', path.join(__dirname, '..', '..', 'views'));
   app.set('case sensitive routing', true);
   app.set('strict routing', true);
 
@@ -94,7 +93,7 @@ function createApp(assets) {
     });
   }
 
-  app.use(express.static(publicDir, {
+  app.use('/images', express.static(imagesDir, {
     index: false,
     dotfiles: 'ignore',
     maxAge: config.isProduction ? '7d' : 0,
@@ -137,15 +136,10 @@ function createApp(assets) {
     });
   });
 
-  // Something went wrong. The patient sees a plain page. The log gets the
-  // time, the route and the error, and never the form contents.
+  // Something went wrong. The patient sees a plain page.
   // eslint-disable-next-line no-unused-vars
   app.use((error, req, res, next) => {
     const status = error.status && error.status >= 400 && error.status < 600 ? error.status : 500;
-    if (status >= 500) {
-      logError(`${req.method} ${req.path} ${status} ${errorName(error)}`);
-      if (!config.isProduction) console.error(error.stack);
-    }
     if (res.headersSent) return res.end();
 
     const tooLarge = status === 413;

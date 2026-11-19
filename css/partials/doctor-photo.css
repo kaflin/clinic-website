@@ -1,0 +1,12 @@
+.photo-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-5);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  background: var(--color-bg-tint-strong);
+  border: 1px dashed var(--color-border-strong);
+  border-radius: var(--radius-lg);
+}

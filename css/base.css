@@ -1,0 +1,71 @@
+/*
+  Shared base styles and utility classes used across many views.
+  theme.css is loaded first and holds every colour, font and size as a
+  variable, so this folder only lays pages out and has no hex codes or
+  font names.
+*/
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+img { max-width: 100%; height: auto; display: block; }
+p, ul, ol, dl, dd, figure, blockquote { margin: 0; }
+address { font-style: normal; }
+h1, h2, h3 { text-wrap: balance; }
+
+.container--narrow { max-width: 820px; }
+.text-center { text-align: center; }
+.lead { font-size: var(--text-lg); color: var(--color-text-muted); max-width: 34em; }
+
+.stack { display: flex; flex-direction: column; gap: var(--space-4); align-items: flex-start; }
+.stack-lg { display: flex; flex-direction: column; gap: var(--space-7); }
+
+.rule { display: block; width: 56px; height: 2px; background: var(--color-primary); }
+.rule--soft { background: var(--color-primary-soft); }
+
+.button-row { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+.split {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  gap: var(--space-7);
+  align-items: start;
+}
+
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  text-align: center;
+}
+.section-heading__intro { max-width: 40em; }
+
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 340px)); justify-content: center; gap: var(--space-5); }
+
+.fact-list { display: flex; flex-direction: column; width: 100%; margin: 0; }
+.fact-list > div { display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-5); padding: var(--space-3) 0; border-top: 1px solid var(--color-border); }
+.fact-list > div:last-child { border-bottom: 1px solid var(--color-border); }
+.fact-list dt { flex: 0 0 12em; font-weight: 600; }
+.fact-list dd { flex: 1 1 12em; }
+
+.stack > p > a:not(.btn), .text-center > a:not(.btn) { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Long text (policy pages, service pages, patient information) */
+.prose > * + * { margin-top: var(--space-4); }
+.prose > h2 { font-size: 1.75rem; margin-top: var(--space-7); }
+.prose > h2:first-child { margin-top: 0; }
+.prose ul, .prose ol { padding-left: var(--space-5); }
+.prose li + li { margin-top: var(--space-2); }
+.prose li a { display: inline-block; padding: var(--space-2) 0; }
+
+@media (max-width: 760px) {
+  :root {
+    --container-padding: 20px;
+    --text-3xl: 2.25rem;
+    --text-2xl: 1.875rem;
+    --space-8: 48px;
+  }
+  .prose > h2 { font-size: 1.5rem; }
+  .button-row .btn { flex: 1 1 100%; }
+}

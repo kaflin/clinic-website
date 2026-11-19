@@ -1,0 +1,5 @@
+.doctor-card { display: flex; flex-direction: column; gap: var(--space-4); }
+.doctor-card__photo { width: 100%; height: 280px; object-fit: cover; border-radius: var(--radius-md); }
+.doctor-card__body { display: flex; flex-direction: column; gap: var(--space-1); }
+.doctor-card h3 a { display: inline-flex; align-items: center; min-height: 44px; color: var(--color-text); }
+.doctor-card h3 a:hover { color: var(--color-primary-hover); }

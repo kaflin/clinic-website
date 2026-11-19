@@ -1,0 +1,4 @@
+.contact-list { display: flex; flex-direction: column; gap: var(--space-1); margin: 0; padding: 0; list-style: none; }
+.contact-line { display: flex; align-items: center; gap: var(--space-3); min-height: 44px; }
+.contact-line .icon { color: var(--color-primary); }
+.contact-line a { display: inline-flex; align-items: center; min-height: 44px; }

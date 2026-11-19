@@ -11,11 +11,22 @@ const crypto = require('node:crypto');
 const CleanCSS = require('clean-css');
 const { minify } = require('terser');
 
-const root = path.join(__dirname, '..');
+const root = path.join(__dirname, '..', '..');
 
-// theme.css always comes first, as the theme requires.
-const CSS_FILES = ['documentation/theme.css', 'public/css/site.css'];
-const JS_FILES = ['public/js/site.js'];
+// theme.css always comes first, as the theme requires. Then the shared base
+// styles, then one file per partial, then one file per page, so a page can
+// override a partial.
+const listCss = (dir) => fs.readdirSync(path.join(root, dir))
+  .filter((name) => name.endsWith('.css'))
+  .sort()
+  .map((name) => `${dir}/${name}`);
+const CSS_FILES = [
+  'documentation/theme.css',
+  'css/base.css',
+  ...listCss('css/partials'),
+  ...listCss('css/pages'),
+];
+const JS_FILES = ['js/site.js'];
 
 const read = (files) => files.map((file) => fs.readFileSync(path.join(root, file), 'utf8')).join('\n');
 const hash = (text) => crypto.createHash('sha256').update(text).digest('hex').slice(0, 12);

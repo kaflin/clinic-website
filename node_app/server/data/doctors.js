@@ -11,7 +11,7 @@
   lead       true for the surgeon named in the home page hero. One doctor only.
   services   slugs from services.js that this doctor treats. These make the
              links between doctor pages and treatment pages.
-  photo      a WebP file in public/images, named like
+  photo      a WebP file in images, named like
              'dr-first-last-orthopaedic-surgeon.webp', with its real pixel size.
 */
 

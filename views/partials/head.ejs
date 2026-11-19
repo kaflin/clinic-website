@@ -30,7 +30,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="<%= assets.css.path %>">
 <% (meta.jsonLd || []).forEach((item) => { -%>
-<%# Trusted data from src/data only, with "<" escaped by toScriptJson. -%>
+<%# Trusted data from node_app/server/data only, with "<" escaped by toScriptJson. -%>
 <script type="application/ld+json"><%- toScriptJson(item) %></script>
 <% }) -%>
 <script src="<%= assets.js.path %>" defer></script>

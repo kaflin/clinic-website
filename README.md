@@ -7,33 +7,39 @@ Everything for the clinic website lives in this `clinic-website/` folder. New fi
 You need Node.js 22 or newer and MySQL or MariaDB.
 
 1. `npm install`
-2. `sudo mysql < db/schema.sql`, then create the app's database user with the two commands at the end of that file.
-3. Copy `.env.example` to `.env` and fill in the database password.
-4. `npm run dev`, then open http://localhost:3000
+2. Create a MySQL user for the app, as a MySQL administrator (use your own password):
+   ```
+   sudo mysql -e "CREATE USER IF NOT EXISTS 'clinic_app'@'localhost' IDENTIFIED BY 'YOUR_PASSWORD'; GRANT ALL ON clinic_website.* TO 'clinic_app'@'localhost'; FLUSH PRIVILEGES;"
+   ```
+3. Put the same password in `DB_PASSWORD` in `node_app/.env`. That file is the only place for settings (port, site address, cookie secret, database, email) and is ignored by git.
+4. `npm run dev`, then open http://localhost:3000. The `clinic_website` database and the `appointments` table are created automatically on start.
 
-The pages open without a database. Only sending the appointment form needs one.
+The pages open without a database. Only sending the appointment form needs one. The code writes nothing to the console, so a failed start or a database problem is silent. `npm run check:content` also prints nothing and reports through its exit code.
 
 | Command | What it does |
 |---|---|
 | `npm run dev` | Starts the site and restarts it when a file changes. |
 | `npm start` | Starts the site. With `NODE_ENV=production` it refuses to start if a secret is weak or a clinic fact is missing. |
-| `npm run check:content` | Lists the clinic facts that are still missing. |
+| `npm run check:content` | Exits with code 0 when every clinic fact is filled in and 1 when some are missing. It prints nothing. |
 | `npm run purge:appointments` | Deletes appointment requests older than the retention period. Run it daily from cron. |
 
 ## Files
 
 | File or folder | What it is |
 |---|---|
-| `src/data/` | The clinic's facts and all page content: `clinic.js`, `doctors.js`, `services.js`, `faqs.js`. Fill in the clinic's details here. |
-| `server.js` | Starts the site. |
-| `src/app.js` | The Express app: security headers, redirects, static files, error pages. |
-| `src/routes/` | One file each for the pages, the appointment form, and `robots.txt` and `sitemap.xml`. |
-| `src/services/` | The logic, kept out of the routes: appointments, front desk email, content helpers, structured data. |
-| `src/middleware/csrf.js` | CSRF protection for the form. |
-| `src/assets.js` | Minifies the CSS and JavaScript when the site starts. There is no build step. |
+| `node_app/.env` | All settings and secrets. Not committed. |
+| `node_app/scripts/` | `check-content.js` and `purge-appointments.js`, run through the npm commands above. |
+| `node_app/server/data/` | The clinic's facts and all page content: `clinic.js`, `doctors.js`, `services.js`, `faqs.js`. Fill in the clinic's details here. |
+| `node_app/server/server.js` | Starts the site and creates the database tables. |
+| `node_app/server/config.js` | Reads `node_app/.env`. |
+| `node_app/server/db.js` | The MySQL connection, and the code that creates the database and table. |
+| `node_app/server/app.js` | The Express app: security headers, redirects, static files, error pages. |
+| `node_app/server/routes/` | One file each for the pages, the appointment form, and `robots.txt` and `sitemap.xml`. |
+| `node_app/server/services/` | The logic, kept out of the routes: appointments, front desk email, content helpers, structured data. |
+| `node_app/server/middleware/csrf.js` | CSRF protection for the form. |
+| `node_app/server/assets.js` | Minifies the CSS and JavaScript when the site starts. There is no build step. |
 | `views/` | EJS templates. `partials/` holds the shared head, header, footer, form and icons. `pages/` holds one file per page. |
-| `public/` | `css/site.css` (layout only, built on the theme variables), `js/site.js` (mobile menu) and `images/`. |
-| `db/schema.sql` | Creates the database and the appointments table. |
+| `css/`, `js/`, `images/` | `css/` (layout only, built on the theme variables: `base.css`, one file per view in `partials/` and `pages/`), `js/site.js` (mobile menu) and `images/` (served at `/images`). |
 | `documentation/theme.css` | Medical teal theme in the classic "Established practice" style: colours, fonts, spacing and base components as CSS variables. It is loaded first on every page. |
 | `documentation/tech-stack.md` | The tech stack, why each part was chosen, and how the patient portal fits in later. |
 | `documentation/seo-checklist.md` | Full SEO checklist: local SEO, content, on-page tags, structured data, technical setup, speed, trust and after-launch tasks. |
@@ -65,11 +71,11 @@ Node.js, Express.js, EJS templates, `theme.css` and MySQL. Full details are in `
 
 ## Still needed
 
-Run `npm run check:content` for the full list. Until a fact is filled in, the site shows it as a marker in square brackets, like `[CLINIC NAME]`.
+Run `npm run check:content` to see whether any are left (it prints nothing, so look at `node_app/server/data/` for the `[BRACKETED]` markers). Until a fact is filled in, the site shows it as a marker in square brackets, like `[CLINIC NAME]`.
 
 - Clinic name, city, address, phone, email and opening hours.
 - Map link, map coordinates and the Google reviews link.
-- Doctor names, qualifications, registration numbers and photos (WebP, in `public/images/`).
+- Doctor names, qualifications, registration numbers and photos (WebP, in `images/`).
 - Year established, hospital affiliations and other credentials for the home page strip.
 - One real patient testimonial, used with the patient's permission.
 - Clinic history and facilities for the About page.

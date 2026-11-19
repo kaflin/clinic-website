@@ -1,0 +1,11 @@
+/* The doctor row layout is also used by doctor.ejs. */
+.doctor-row { display: grid; grid-template-columns: minmax(0, 320px) minmax(0, 1fr); gap: var(--space-7); align-items: start; }
+.doctor-row + .doctor-row { padding-top: var(--space-7); border-top: 1px solid var(--color-border); }
+.doctor-row__photo { width: 100%; height: 380px; object-fit: cover; border-radius: var(--radius-lg); }
+.doctor-row h2 a { color: var(--color-text); }
+.doctor-row h2 a:hover { color: var(--color-primary-hover); }
+
+@media (max-width: 760px) {
+  .doctor-row { grid-template-columns: minmax(0, 1fr); }
+  .doctor-row__photo { height: 320px; }
+}
