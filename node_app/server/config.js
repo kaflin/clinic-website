@@ -16,14 +16,6 @@ const config = {
   port: Number(env.PORT) || 3000,
   siteUrl: (env.SITE_URL || 'http://localhost:3000').replace(/\/+$/, ''),
   cookieSecret: env.COOKIE_SECRET || '',
-  db: {
-    host: env.DB_HOST || '127.0.0.1',
-    port: Number(env.DB_PORT) || 3306,
-    socketPath: env.DB_SOCKET || undefined,
-    user: env.DB_USER || '',
-    password: env.DB_PASSWORD || '',
-    database: env.DB_NAME || 'clinic_website',
-  },
   mail: {
     host: env.SMTP_HOST || '',
     port: Number(env.SMTP_PORT) || 587,
@@ -40,8 +32,6 @@ function productionProblems() {
   const problems = [];
   if (config.cookieSecret.length < 32) problems.push('COOKIE_SECRET must be at least 32 characters.');
   if (!config.siteUrl.startsWith('https://')) problems.push('SITE_URL must start with https://');
-  if (!config.db.user || config.db.user === 'root') problems.push('DB_USER must be the app\'s own MySQL user, not root.');
-  if (!config.db.password) problems.push('DB_PASSWORD is empty.');
   return problems;
 }
 

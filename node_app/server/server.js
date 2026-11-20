@@ -1,27 +1,20 @@
 'use strict';
 
 const { config, productionProblems } = require('./config');
-const { missingFacts } = require('./services/content');
 const { buildAssets } = require('./assets');
 const { createApp } = require('./app');
-const db = require('./db');
+
+const say = (text) => process.stderr.write(`${new Date().toISOString()} ${text}\n`);
 
 async function start() {
-  const missing = missingFacts();
-
   if (config.isProduction) {
-    // The live site must not start with weak settings or unfinished content.
-    const problems = [...productionProblems(), ...missing.map((item) => `Missing content, ${item}`)];
+    // The live site must not start with weak settings. Missing clinic facts do
+    // not stop it: the page shows a [MARKER] where a fact is empty.
+    const problems = productionProblems();
     if (problems.length) {
+      say(`Cannot start in production: ${problems.join(' ')}`);
       process.exit(1);
     }
-  }
-
-  try {
-    await db.init();
-  } catch {
-    // The pages still work without the database; only the form needs it.
-    if (config.isProduction) process.exit(1);
   }
 
   const assets = await buildAssets();
@@ -29,12 +22,13 @@ async function start() {
   const server = app.listen(config.port);
 
   const stop = () => {
-    server.close(() => db.close().finally(() => process.exit(0)));
+    server.close(() => process.exit(0));
   };
   process.on('SIGTERM', stop);
   process.on('SIGINT', stop);
 }
 
-start().catch(() => {
+start().catch((error) => {
+  say(`The site could not start: ${error.stack || error.message}`);
   process.exit(1);
 });

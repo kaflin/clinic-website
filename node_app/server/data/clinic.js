@@ -70,8 +70,8 @@ module.exports = {
     facilities: null,         // e.g. ['Digital X-ray', 'Plaster room', ...]
   },
 
-  // How long appointment requests are kept before `npm run purge:appointments`
-  // deletes them. The privacy policy quotes this number.
+  // How long appointment requests are kept before they are deleted.
+  // The privacy policy quotes this number.
   appointmentRetentionMonths: null,   // e.g. 12
 
   // The date the legal pages were last approved by the clinic, e.g. '2026-11-15'.

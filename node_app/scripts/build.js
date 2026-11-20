@@ -20,7 +20,7 @@ const isSecret = (name) => name === '.env' || name.startsWith('.env.') || name.e
 
 // Folders and files that make up the site. Anything else (docs, .env, the
 // build script itself) stays out of dist/.
-const INCLUDE = ['node_app', 'css', 'js', 'images', 'views', 'documentation/theme.css', 'package.json', 'package-lock.json'];
+const INCLUDE = ['node_app', 'css', 'js', 'images', 'views', 'package.json', 'package-lock.json'];
 const EXCLUDE = new Set(['node_app/scripts/build.js']);
 
 function* walk(relative) {

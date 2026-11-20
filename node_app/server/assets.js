@@ -21,7 +21,7 @@ const listCss = (dir) => fs.readdirSync(path.join(root, dir))
   .sort()
   .map((name) => `${dir}/${name}`);
 const CSS_FILES = [
-  'documentation/theme.css',
+  'css/theme.css',
   'css/base.css',
   ...listCss('css/partials'),
   ...listCss('css/pages'),

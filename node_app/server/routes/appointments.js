@@ -50,18 +50,22 @@ router.post('/appointment', issueToken, limiter, verifyToken, appointments.rules
     return renderForm(res, 422, { values, errors, message: 'Please check the fields marked below and send the form again.' });
   }
 
+  // There is no database yet. The request goes to the front desk by email.
+  // Without email set up, the patient is asked to call instead, so no
+  // request is ever lost silently.
   const request = matchedData(req);
+  let sent = false;
   try {
-    await appointments.createAppointment(request);
+    sent = await notify.notifyFrontDesk(request);
   } catch {
+    sent = false;
+  }
+  if (!sent) {
     return renderForm(res, 503, {
       values,
-      message: `We couldn't save your request just now. Please try again in a few minutes, or call us on ${display.phone}.`,
+      message: `Online requests are not open yet. Please call us on ${display.phone} to book.`,
     });
   }
-
-  // The request is saved, so an email problem must not show the patient an error.
-  notify.notifyFrontDesk(request).catch(() => {});
 
   res.redirect(303, '/appointment/received');
 });

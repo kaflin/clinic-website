@@ -2,7 +2,7 @@
   "name": "clinic-website",
   "version": "1.0.0",
   "private": true,
-  "description": "Orthopaedic clinic website: Node.js, Express, EJS and MySQL",
+  "description": "Orthopaedic clinic website: Node.js, Express and EJS",
   "main": "node_app/server/server.js",
   "engines": {
     "node": ">=22"
@@ -11,8 +11,7 @@
     "start": "node node_app/server/server.js",
     "dev": "node --watch node_app/server/server.js",
     "build": "node node_app/scripts/build.js",
-    "check:content": "node node_app/scripts/check-content.js",
-    "purge:appointments": "node node_app/scripts/purge-appointments.js"
+    "check:content": "node node_app/scripts/check-content.js"
   },
   "dependencies": {
     "clean-css": "^5.3.3",
@@ -23,7 +22,6 @@
     "express-rate-limit": "^8.7.4",
     "express-validator": "^7.3.2",
     "helmet": "^8.3.0",
-    "mysql2": "^3.24.6",
     "nodemailer": "^10.5.0",
     "terser": "^5.51.2"
   }

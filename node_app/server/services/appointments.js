@@ -1,11 +1,10 @@
 'use strict';
 
-// Appointment requests: the rules for the form and the database work.
+// Appointment requests: the rules for the form.
 // Kept apart from the routes so a JSON API or the patient portal can use
 // the same functions later.
 
 const { body } = require('express-validator');
-const db = require('../db');
 
 const LIMITS = { name: 80, phone: 20, concern: 500 };
 
@@ -35,21 +34,4 @@ const rules = [
     .isLength({ max: LIMITS.concern }).withMessage(`Please keep this under ${LIMITS.concern} characters. You can tell us more on the phone.`),
 ];
 
-async function createAppointment({ name, phone, concern }) {
-  await db.execute(
-    'INSERT INTO appointments (full_name, phone, concern) VALUES (?, ?, ?)',
-    [name, phone, concern || null],
-  );
-}
-
-// Deletes requests older than the clinic's retention period. Returns how many went.
-async function purgeOlderThan(months) {
-  if (!Number.isInteger(months) || months < 1) throw new Error('Retention period must be a whole number of months.');
-  const result = await db.execute(
-    'DELETE FROM appointments WHERE created_at < DATE_SUB(NOW(), INTERVAL ? MONTH)',
-    [months],
-  );
-  return result.affectedRows;
-}
-
-module.exports = { LIMITS, EMPTY_FORM, rules, createAppointment, purgeOlderThan };
+module.exports = { LIMITS, EMPTY_FORM, rules };
